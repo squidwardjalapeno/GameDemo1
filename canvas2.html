@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Gamedev Canvas Workshop</title>
+    <style>
+        :root{
+            --pixel-size: 6;
+        }
+    	* { padding: 0; margin: 0; }
+    	canvas { background: #eee; display: block; margin: 0 auto; }
+        #guy{
+            position: absolute;
+            height: calc(68px * var(--pixel-size));
+            width: calc(48px * var(--pixel-size));
+            outline: 1px solid block;
+            top: 480px;
+            left: 270px;
+            background: blue;
+            overflow: hidden;
+            image-rendering: pixelated;
+        }    
+        .characterSpriteSheet{
+            animation: moveSpriteSheet 1s steps(4) infinite;
+            width: calc(192px * var(--pixel-size));
+            position: absolute;
+            top: 0px;
+        }       
+        @keyframes moveSpriteSheet{
+
+            from {
+                transform: translate3d(0px, 0, 0)
+            }
+            to {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }   
+    </style>
+</head>
+
+
+
+<body>
+  
+<canvas id="myCanvas" width="480" height="270"></canvas>
+<canvas id="myCanvas2" left:270px; top:480px; width="1600" height="1600"></canvas>
+
+
+
+<div id = "guy">
+
+    <img class = "characterSpriteSheet" src = "chrono.png" alt = "player" />
+
+</div>
+<div>
+
+
+</div>
+
+<script>
+	// JavaScript code goes here
+var canvas = document.getElementById("myCanvas");
+var canvas2 = document.getElementById("myCanvas2");
+var ctx = canvas.getContext("2d");
+var ctx2 = canvas2.getContext("2d");
+var guy = document.getElementById("guy");
+var guyLeft = 270;
+var guyTop = 480;
+var worldTiles = new Image();
+worldTiles.src = "tiles-overworld.png";
+var x = [];
+var y  = [];
+    for (i=0; i < canvas.width; i++){
+        x[i] = []
+        y[i] = []
+    }
+
+    for (i=1; i < canvas.width - 1; i++){
+        for (j=1; j < canvas.height - 1; j++){
+            var randomY2 = Math.floor(Math.random() * 4) + 1;
+            var random = Math.floor(Math.random() * 400) + 1;
+            var random2 = Math.floor(Math.random() * 100) + 1;
+            var random3 = Math.floor(Math.random() * 100) + 1;
+            var random4 = Math.floor(Math.random() * 3) + 1;
+            var random5 = Math.floor(Math.random() * 3) + 1;
+            var random6 = Math.floor(Math.random() * 3) + 1;
+            var random7 = Math.floor(Math.random() * 3) + 1;
+            var random8 = Math.floor(Math.random() * 3) + 1;
+            var random9 = Math.floor(Math.random() * 3) + 1;
+            if (random > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            } 
+            if (landType = 1){
+            if (random > 388 && random <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (random >= 373 && random <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+        }
+        if (landType = 2){
+            if (random <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (random > 25 && random <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (random > 31 && random <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (random > 37 && random <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (random > 50 && random <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (random > 64 && random <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (random > 74 && random <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (random > 90 && random <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (random > 97 && random <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        x[i][j] = random;
+    }
+    // First Columns
+            /*ctx.fillRect(i * 24, j * 12, 6, 12);
+            ctx.fillRect(i * 24 + 6, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 4, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 6, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 + 10, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 - 5, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 - 5, j * 12 + 7, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 7, 1, 1);*/
+            //second rows
+           
+    }
+}
+for (i=1; i < canvas.width - 1; i++){
+        for (j=1; j < canvas.height - 1; j++){
+            var randomCanvas = Math.floor(Math.random() * 400) + 1;
+            if (randomCanvas > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            } 
+            if (landType = 1){
+            if (randomCanvas > 388 && randomCanvas <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (randomCanvas >= 373 && randomCanvas <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+            }
+            if (landType = 2){
+            if (randomCanvas <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (randomCanvas > 25 && randomCanvas <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (randomCanvas > 31 && randomCanvas <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (randomCanvas > 37 && randomCanvas <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (randomCanvas > 50 && randomCanvas <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (randomCanvas > 64 && randomCanvas <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (randomCanvas > 74 && randomCanvas <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (randomCanvas > 90 && randomCanvas <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (randomCanvas > 97 && randomCanvas <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        y[i][j] = randomCanvas
+        }
+            /*ctx.fillRect(i * 24 + 12, j * 12 - 6, 6, 12);
+            ctx.fillRect(i * 24 + 18, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 8, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 6, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 22, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 7, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 1, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 + 1, 1, 1);*/
+        }
+    }
+function cellularAutomatonY(){
+for (i=1; i < canvas.width - 1; i++){
+    for (j=1; j < canvas.height - 1; j++){
+    var randomCanvas2;
+    var numLand = 0;
+    var outOf4 = Math.floor(Math.random() * 4) + 1
+        if ( outOf4 == 1){
+            randomCanvas2 = y[i][j];
+        }
+        if ( outOf4 == 2){
+            randomCanvas2 = y[i+1][j];
+        }
+        if ( outOf4 == 3){
+            randomCanvas2 = y[i][j+1];
+        }
+        if ( outOf4 == 4){
+            randomCanvas2 = y[i+1][j+1];
+        }
+            /*if (y[i][j] <= 100){
+                
+            numLand++;
+            }
+            if (y[i+1][j] <= 100){
+                
+                numLand++;
+            }
+            if (y[i][j+1] <= 100){
+                
+                numLand++;
+            }
+            if (y[i+1][j+1] <= 100){
+                
+                numLand++;
+            }
+            if ( numLand == 0){
+            randomCanvas2 = Math.floor(Math.random() * 3900) + 100;
+            }
+            if ( numLand == 1){
+                var outOf4 = Math.floor(Math.random() * 4) + 1;
+                if ( outOf4 >= 4){
+                randomCanvas2 = Math.floor(Math.random() * 100) + 1;
+                }
+            }
+            if (numLand == 2){
+                var flipCoin = Math.floor(Math.random() * 2) + 1;
+                if ( flipCoin < 2){
+                randomCanvas2 = Math.floor(Math.random() * 100) + 1;
+                }
+            }
+            if (numLand == 3){
+                var outOf41 = Math.floor(Math.random() * 4) + 1;
+                if (outOf41 < 4){
+                randomCanvas2 = Math.floor(Math.random() * 100) + 1;
+                }
+            } 
+            if (numLand == 4){
+                randomCanvas2 = Math.floor(Math.random() * 100) + 1;
+            } */
+             if (randomCanvas2 > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            }
+            if (landType = 1){
+            if (randomCanvas2 > 388 && randomCanvas2 <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (randomCanvas2 >= 373 && randomCanvas2 <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+            }
+            if (landType = 2){
+            if (randomCanvas2 <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (randomCanvas2 > 25 && randomCanvas2 <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (randomCanvas2 > 31 && randomCanvas2 <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (randomCanvas2 > 37 && randomCanvas2 <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (randomCanvas2 > 50 && randomCanvas2 <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (randomCanvas2 > 64 && randomCanvas2 <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (randomCanvas2 > 74 && randomCanvas2 <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (randomCanvas2 > 90 && randomCanvas2 <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (randomCanvas2 > 97 && randomCanvas2 <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        x[i][j] = randomCanvas2;
+        }
+            /*ctx.fillRect(i * 24, j * 12, 6, 12);
+            ctx.fillRect(i * 24 + 6, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 4, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 6, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 + 10, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 - 5, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 - 5, j * 12 + 7, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 7, 1, 1);*/
+    }
+    }
+}
+function cellularAutomatonX(){
+for (i=1; i < canvas.width - 1; i++){
+    for (j=1; j < canvas.height - 1; j++){
+    var randomCanvas3;
+    var numLand2 = 0;
+    var outOf42 = Math.floor(Math.random() * 4) + 1;
+        if ( outOf42 == 1){
+            randomCanvas3 = x[i][j];
+        }
+        if ( outOf42 == 2){
+            randomCanvas3 = x[i+1][j];
+        }
+        if ( outOf42 == 3){
+            randomCanvas3 = x[i][j+1];
+        }
+        if ( outOf42 == 4){
+            randomCanvas3 = x[i+1][j+1]
+        }
+            /*if (x[i][j] <= 100){
+                
+                numLand2++;
+            }
+            if (x[i+1][j] <= 100){
+                
+                numLand2++;
+            }
+            if (x[i][j+1] <= 100){
+                
+                numLand2++;
+            }
+            if (x[i+1][j+1] <= 100){
+                
+                numLand2++;
+            }
+            if ( numLand2 == 0){
+            randomCanvas3 = Math.floor(Math.random() * 3900) + 100;
+            }
+            if ( numLand2 == 1){
+                var outOf42 = Math.floor(Math.random() * 4) + 1;
+                if ( outOf42 >= 4){
+                randomCanvas3 = Math.floor(Math.random() * 100) + 1;
+                }
+            }
+            if (numLand2 == 2){
+                var flipCoin2 = Math.floor(Math.random() * 2) + 1;
+                if ( flipCoin2 < 2){
+                randomCanvas3 = Math.floor(Math.random() * 100) + 1;
+                }
+            }
+            if (numLand2 == 3){
+                var outOf43 = Math.floor(Math.random() * 4) + 1;
+                if (outOf43 < 4){
+                randomCanvas3 = Math.floor(Math.random() * 100) + 1;
+                }
+            } 
+            if (numLand2 == 4){
+                randomCanvas3 = Math.floor(Math.random() * 100) + 1;
+            } */          
+            if (randomCanvas3 > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            } 
+            if (landType = 1){
+            if (randomCanvas3 > 388 && randomCanvas3 <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (randomCanvas3 >= 373 && randomCanvas3 <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+            }
+            if (landType = 2){
+            if (randomCanvas3 <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (randomCanvas3 > 25 && randomCanvas3 <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (randomCanvas3 > 31 && randomCanvas3 <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (randomCanvas3 > 37 && randomCanvas3 <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (randomCanvas3 > 50 && randomCanvas3 <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (randomCanvas3 > 64 && randomCanvas3 <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (randomCanvas3 > 74 && randomCanvas3 <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (randomCanvas3 > 90 && randomCanvas3 <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (randomCanvas3 > 97 && randomCanvas3 <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        y[i][j] = randomCanvas3;
+        }
+            /*ctx.fillRect(i * 24 + 12, j * 12 - 6, 6, 12);
+            ctx.fillRect(i * 24 + 18, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 8, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 6, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 22, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 7, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 1, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 + 1, 1, 1);*/
+        //box
+    }
+    }
+}
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+cellularAutomatonX();
+cellularAutomatonY();
+
+
+for (i=1; i < canvas.width - 1; i++){
+    for (j=1; j < canvas.height - 1; j++){
+        var randomCanvas4 = x[i][j];
+        if (randomCanvas4 > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            } 
+            if (landType = 1){
+            if (randomCanvas4 > 388 && randomCanvas4 <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (randomCanvas4 >= 373 && randomCanvas4 <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+            }
+            if (landType = 2){
+            if (randomCanvas4 <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (randomCanvas4 > 25 && randomCanvas4 <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (randomCanvas4 > 31 && randomCanvas4 <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (randomCanvas4 > 37 && randomCanvas4 <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (randomCanvas4 > 50 && randomCanvas4 <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (randomCanvas4 > 64 && randomCanvas4 <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (randomCanvas4 > 74 && randomCanvas4 <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (randomCanvas4 > 90 && randomCanvas4 <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (randomCanvas4 > 97 && randomCanvas4 <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        }
+        ctx.fillRect(i * 24, j * 12, 6, 12);
+            ctx.fillRect(i * 24 + 6, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 4, j * 12 + 3, 4, 6);
+            ctx.fillRect(i * 24 - 6, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 + 10, j * 12 + 5, 2, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 - 1, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 1, 1, 2);
+            ctx.fillRect(i * 24 + 6, j * 12 + 9, 1, 2);
+            ctx.fillRect(i * 24 - 5, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 - 5, j * 12 + 7, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 - 2, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 9, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 7, 1, 1);
+    }
+}
+for (i=1; i < canvas.width - 1; i++){
+    for (j=1; j < canvas.height - 1; j++){
+        var randomCanvas5 = y[i][j];
+        if (randomCanvas5 > 100){
+                landType = 1;
+            }
+            else { landType = 2;
+            } 
+            if (landType = 1){
+            if (randomCanvas5 > 388 && randomCanvas5 <= 400){
+            ctx.fillStyle = ('aqua');
+            }
+            if (randomCanvas5 >= 373 && randomCanvas5 <= 388){
+            ctx.fillStyle = ('aqua');
+            }
+            else { ctx.fillStyle = ('aqua');
+            }
+            }
+            if (landType = 2){
+            if (randomCanvas5 <= 25){
+                ctx.fillStyle = ('khaki');
+            }
+            if (randomCanvas5 > 25 && randomCanvas5 <= 31){
+                ctx.fillStyle = ('magenta');
+            }
+            if (randomCanvas5 > 31 && randomCanvas5 <= 37){
+                ctx.fillStyle = ('green');
+        }
+        if (randomCanvas5 > 37 && randomCanvas5 <= 50){
+            ctx.fillStyle = ('darkgreen');
+        }
+        if (randomCanvas5 > 50 && randomCanvas5 <= 64){
+            ctx.fillStyle = ('forestgreen');
+        }
+        if (randomCanvas5 > 64 && randomCanvas5 <= 74) {
+            ctx.fillStyle = ('white');
+        }
+        if (randomCanvas5 > 74 && randomCanvas5 <= 90) {
+            ctx.fillStyle = ('sandybrown');
+        }
+        if (randomCanvas5 > 90 && randomCanvas5 <= 97) {
+            ctx.fillStyle = ('lawngreen');
+        }
+        if (randomCanvas5 > 97 && randomCanvas5 <= 100) {
+            ctx.fillStyle = ('red');
+        }
+        }
+        ctx.fillRect(i * 24 + 12, j * 12 - 6, 6, 12);
+            ctx.fillRect(i * 24 + 18, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 8, j * 12 - 3, 4, 6);
+            ctx.fillRect(i * 24 + 6, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 22, j * 12 - 1, 2, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 11, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 - 5, 1, 2);
+            ctx.fillRect(i * 24 + 18, j * 12 + 3, 1, 2);
+            ctx.fillRect(i * 24 + 7, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 7, j * 12 + 1, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 10, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 - 4, 1, 1);
+            ctx.fillRect(i * 24 + 19, j * 12 + 3, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 - 2, 1, 1);
+            ctx.fillRect(i * 24 + 22, j * 12 + 1, 1, 1);
+    }
+}
+var startingMap = []
+for ( i=0; i < 100; i++){
+    startingMap[i] = []
+}
+
+function generateTrees(density){
+    for (i=0; i < 100; i++){
+        for (j=0; j < 100; j++){
+            var randomBlock = Math.floor(Math.random() * 100) + 1;
+            if ( randomBlock > density){
+                startingMap[i][j] = 2;
+            }
+            else { startingMap[i][j] = 25;
+            } 
+        }
+    }
+}
+
+generateTrees(10);
+
+function draw(){
+    for ( i=0; i < startingMap.length; i++){
+        for ( j=0; j < startingMap[i].length; j++){
+            ctx2.drawImage(worldTiles, ((startingMap[i][j]%18) * 17) + 1, (Math.floor(startingMap[i][j] / 18) * 17) + 1, 16, 16, j * 16, i * 16, 16, 16);
+        }
+    }
+}
+
+
+
+
+
+function anim(e){
+
+if( e.keyCode == 40){
+    guyTop +=2;
+    guy.style.top = guyTop + 'px'; 
+    
+}
+if( e.keyCode == 39){
+    guyLeft +=2;
+    guy.style.left = guyLeft + 'px';
+}
+if( e.keyCode == 38){
+    guyTop -=2;
+    guy.style.top = guyTop + 'px';
+}
+if( e.keyCode == 37){
+    guyLeft -=2;
+    guy.style.left = guyLeft + 'px';
+}
+}
+
+document.onkeydown = anim;
+
+
+window.onload = function(){
+    draw();
+}
+
+
+
+
+    // drawing code
+
+
+</script>
+
+
+
+</body>
+</html>

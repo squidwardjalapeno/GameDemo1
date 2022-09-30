@@ -1,0 +1,11 @@
+.container {
+    position: absolute;
+    background: #0FF;
+  }
+  
+  #myCanvas {
+    position: relative;
+    background: #F00;
+    top: 130px;
+    left: 200px;
+  }
