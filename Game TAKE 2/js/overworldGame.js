@@ -52,6 +52,12 @@ corn.src = "images/corn.png";
 corn.onload = function () {
 };
 
+
+
+
+
+
+
 /*var startingMap = []
 for ( i=0; i < 100; i++){
     startingMap[i] = []
@@ -82,6 +88,7 @@ function generateTrees(density, castleDensity, grassDensity){
 generateTrees(6, 9998, 20);
 */
 
+// GAME LOGIC
 
 x = [];
 
@@ -108,22 +115,89 @@ function cellularAutomata(){
         for (j=1; j < 99; j++){
         var randomCanvas2;
         var numLand = 0;
-        var outOf4 = Math.floor(Math.random() * 4) + 1
-        if ( outOf4 == 1){
+        var outOf8 = Math.floor(Math.random() * 8) + 1
+        if ( outOf8 == 1){
             randomCanvas2 = x[i-1][j];
         }
-        if ( outOf4 == 2){
+        if ( outOf8 == 2){
             randomCanvas2 = x[i+1][j];
         }
-        if ( outOf4 == 3){
+        if ( outOf8 == 3){
             randomCanvas2 = x[i][j-1];
         }
-        if ( outOf4 == 4){
+        if ( outOf8 == 4){
             randomCanvas2 = x[i][j+1];
         }
+		if ( outOf8 == 5){
+            randomCanvas2 = x[i+1][j+1];
+        }
+		if ( outOf8 == 6){
+            randomCanvas2 = x[i-1][j+1];
+        }
+		if ( outOf8 == 7){
+            randomCanvas2 = x[i-1][j-1];
+        }
+		if ( outOf8 == 8){
+            randomCanvas2 = x[i+1][j-1];
+        }
+		
         x[i][j] = randomCanvas2;
+
+		
+
+			
+		
     }
     }
+}
+
+
+function cleanUpMap(){
+
+for (i=1; i < 99; i++){
+    for (j=1; j < 99; j++){
+
+	if( x[i][j] >= 67 &&
+
+		x[i-1][j] < 67 &&
+		x[i][j-1] < 67 &&
+		x[i+1][j] < 67 &&
+		x[i][j+1] < 67 
+		/*&&
+		x[i-1][j+1] < 67 &&
+		x[i-1][j-1] < 67 &&
+		x[i+1][j+1] < 67 &&
+		x[i+1][j-1] < 67
+		*/){
+
+		x[i][j] = Math.floor(Math.random() * 66) + 1
+
+		
+
+		}
+
+		if( x[i][j] < 67 &&
+
+			x[i-1][j] >= 67 &&
+			x[i][j-1] >= 67 &&
+			x[i+1][j] >= 67 &&
+			x[i][j+1] >= 67 
+			/*&&
+			x[i-1][j+1] < 67 &&
+			x[i-1][j-1] < 67 &&
+			x[i+1][j+1] < 67 &&
+			x[i+1][j-1] < 67
+			*/){
+	
+			x[i][j] = Math.floor(Math.random() * 33) + 1 + 67;
+	
+			
+	
+			}
+	}
+}
+
+
 }
 
 
@@ -158,6 +232,7 @@ grouping();
 
 function interInterGrouping(){
 interGrouping();
+
 interGrouping();
 interGrouping();
 interGrouping();
@@ -168,13 +243,18 @@ interGrouping();
 interGrouping();
 interGrouping();
 interGrouping();
+
+
 }
 
 interInterGrouping();
+/*
 interInterGrouping();
 interInterGrouping();
 interInterGrouping();
 interInterGrouping();
+
+
 
 interInterGrouping();
 interInterGrouping();
@@ -190,6 +270,9 @@ interInterGrouping();
 
 interInterGrouping();
 interInterGrouping();
+*/
+
+cleanUpMap();
 
 isCastle = [];
 
@@ -277,19 +360,34 @@ for (i=0; i<100; i++){
 
 	function swapLoad(i, j) {
 
-	
-		if (x[i][j] >= 67){
-			
+		
+
+		
+
+		if (x[i][j] >= 67){	
 			
 			matrix[i][j] = []
+
 			for (k=0; k<=100; k++){
+
 				matrix[i][j][k] = []
-				for (l=0; l<=100; l++){                                                                                         
-					var randomBlock = Math.floor(Math.random() * 100) + 1;
-					var density = 6;
-					var grassDensity = 20;
-					if ( randomBlock > density){
-						if ( randomBlock > grassDensity) {
+
+				for (l=0; l<=100; l++){ 
+
+					var randomBlock = Math.floor(Math.random() * 1000) + 1;
+					
+					var density = 60;
+					var grassDensity = 200;
+					
+					
+					
+
+					//if (randomBlock > castleDensity){
+						
+
+						
+						if ( randomBlock > density){
+							if ( randomBlock > grassDensity) {
 							matrix[i][j][k][l] = 63;
 						}
 						else{
@@ -299,9 +397,359 @@ for (i=0; i<100; i++){
 					else {
 						matrix[i][j][k][l] = 7;
 					}
+				//}
+					/*else {
+						matrix[i][j][k][l] = 62;
+
+						var random1 = Math.floor(Math.random() * 4) + 1;
+						var random2 = Math.floor(Math.random() * 4) + 1;
+						var chanceOf2Bedrolls = Math.floor(Math.random() * 4) + 1;
+
+						matrix[i][j][k - random1][l + random2] = 61;
+
+						matrix[i][j][k - random1][l + random2 + 1] = 60;
+						*/
+
+						/*if (chanceOf2Bedrolls == 4) {
+							var random3 = Math.floor(Math.random() * 4) + 1;
+							var random4 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k - random3][l + random4] = 61;
+
+							matrix[i][j][k - random3][l + random4 + 1] = 60;
+
+							
+					}
+							*/
+
+						
+
+						
+
+						
+						
+
+						
+
+						
+					
+				}
+
+
+				
+			}
+
+			
+
+			for (k=5; k<=95; k++){
+
+				
+
+				for (l=5; l<=95; l++){
+					var randomBlock3 = Math.floor(Math.random() * 40000) + 1;
+					var campfireDensity = 10;
+					var houseDensity = 2;
+
+					if (randomBlock3 <= campfireDensity) {
+						matrix[i][j][k][l] = 62;
+
+						var random1 = Math.floor(Math.random() * 4) + 1;
+						var random2 = Math.floor(Math.random() * 4) + 1;
+						var chanceOf2Bedrolls = Math.floor(Math.random() * 4) + 1;
+						var chanceOfTreestump = Math.floor(Math.random() * 2) + 1;
+						var chanceOfStool = Math.floor(Math.random() * 2) + 1;
+						var chanceOf2Stools = Math.floor(Math.random() * 4) + 1;
+						var chanceOfTent = Math.floor(Math.random() * 4) + 1;
+
+						matrix[i][j][k - random1][l + random2] = 61;
+
+						matrix[i][j][k - random1][l + random2 + 1] = 60;
+						
+
+						if (chanceOf2Bedrolls == 4) {
+							var random3 = Math.floor(Math.random() * 4) + 1;
+							var random4 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k - random3][l + random4] = 61;
+
+							matrix[i][j][k - random3][l + random4 + 1] = 60;
+						}
+
+						if (chanceOfTreestump == 2) {
+							var random5 = Math.floor(Math.random() * 4) + 1;
+							var random6 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k - random5][l - random6] = 59;
+
+							
+						}
+
+						if (chanceOfStool == 2) {
+							var random7 = Math.floor(Math.random() * 4) + 1;
+							var random8 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k + random7][l - random8] = 58;
+
+							
+						}
+
+						if (chanceOf2Stools == 2) {
+							var random9 = Math.floor(Math.random() * 4) + 1;
+							var random10 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k + random9][l + random10] = 58;
+
+							
+						}
+
+						if (chanceOfTent == 2) {
+							var random11 = Math.floor(Math.random() * 4) + 1;
+							var random12 = Math.floor(Math.random() * 4) + 1;
+
+							matrix[i][j][k + random11][l + random12] = 55;
+							matrix[i][j][k + random11 - 1][l + random12] = 54;
+							matrix[i][j][k + random11][l + random12 - 1] = 47;
+							matrix[i][j][k + random11 - 1][l + random12 - 1] = 46;
+
+						}
+
+
+
+							
+
+
+					}
+
+					/*
+					if (randomBlock3 == houseDensity){
+
+						matrix[i][j][k][l] = 50;
+						matrix[i][j][k + 1][l] = 49;
+						matrix[i][j][k + 2][l] = 52;
+						matrix[i][j][k + 3][l] = 50;
+
+						matrix[i][j][k][l - 1] = 48;
+						matrix[i][j][k + 1][l - 1] = 48;
+						matrix[i][j][k + 2][l - 1] = 48;
+						matrix[i][j][k + 3][l - 1] = 48;
+
+						matrix[i][j][k][l - 2] = 40;
+						matrix[i][j][k + 1][l - 2] = 40;
+						matrix[i][j][k + 2][l - 2] = 40;
+						matrix[i][j][k + 3][l - 2] = 40;
+
+
+
+
+					}
+						*/
+
+
+						
+
+
+
+
+
+
+
 				}
 			}
+
+			for (k=20; k<=80; k++){
+
+				
+
+				for (l=20; l<=80; l++){
+
+					var randomBlock4 = Math.floor(Math.random() * 4000) + 1;
+					var wellDensity = 1;
+					
+
+					if (randomBlock4 == wellDensity){
+
+						matrix[i][j][k][l] = 38;
+						matrix[i][j][k + 1][l] = 39;
+						matrix[i][j][k][l - 1] = 30;
+						matrix[i][j][k + 1][l - 1] = 31;
+
+						
+						var random15 = Math.floor(Math.random() * 19) + 1;
+						var random16 = Math.floor(Math.random() * 19) + 1;
+						var random17 = Math.floor(Math.random() * 19) + 1;
+						var random18 = Math.floor(Math.random() * 19) + 1;
+						var houseCount = 8;
+
+						function buildHouse(){
+
+							var random13 = Math.floor(Math.random() * 38) - 18;
+							var random14 = Math.floor(Math.random() * 38) - 18;
+				
+							if( (matrix[i][j][k - random13][l - random14] != 40  &&
+								matrix[i][j][k + 3 - random13][l - random14] != 40  &&								
+								matrix[i][j][k - random13][l - 2 - random14] != 40   &&								
+								matrix[i][j][k + 3 - random13][l - 2 - random14] != 40) &&
+
+								(matrix[i][j][k - random13][l - random14] != 48  &&
+								matrix[i][j][k + 3 - random13][l - random14] != 48  &&								
+								matrix[i][j][k - random13][l - 2 - random14] != 48   &&								
+								matrix[i][j][k + 3 - random13][l - 2 - random14] != 48) &&
+
+								(matrix[i][j][k - random13][l - random14] != 49  &&
+								matrix[i][j][k + 3 - random13][l - random14] != 49  &&								
+								matrix[i][j][k - random13][l - 2 - random14] != 49   &&								
+								matrix[i][j][k + 3 - random13][l - 2 - random14] != 49) &&
+
+								(matrix[i][j][k - random13][l - random14] != 50  &&
+								matrix[i][j][k + 3 - random13][l - random14] != 50  &&								
+								matrix[i][j][k - random13][l - 2 - random14] != 50   &&								
+								matrix[i][j][k + 3 - random13][l - 2 - random14] != 50) &&
+
+								(matrix[i][j][k - random13][l - random14] != 52  &&
+								matrix[i][j][k + 3 - random13][l - random14] != 52  &&								
+								matrix[i][j][k - random13][l - 2 - random14] != 52   &&								
+								matrix[i][j][k + 3 - random13][l - 2 - random14] != 52)
+							){	
+								console.log(matrix[i][j][k - random13][l - random14]);
+								console.log(matrix[i][j][k + 3 - random13][l - random14]);
+								console.log(matrix[i][j][k - random13][l - 2 - random14]);
+								console.log(matrix[i][j][k + 3 - random13][l - 2 - random14]);
+
+							
+				
+								matrix[i][j][k - random13][l - random14] = 50;
+								matrix[i][j][k + 1 - random13][l - random14] = 49;
+								matrix[i][j][k + 2 - random13][l - random14] = 52;
+								matrix[i][j][k + 3 - random13][l - random14] = 50;
+				
+								matrix[i][j][k - random13][l - 1 - random14] = 48;
+								matrix[i][j][k + 1 - random13][l - 1 - random14] = 48;
+								matrix[i][j][k + 2 - random13][l - 1 - random14] = 48;
+								matrix[i][j][k + 3 - random13][l - 1 - random14] = 48;
+				
+								matrix[i][j][k - random13][l - 2 - random14] = 40;
+								matrix[i][j][k + 1 - random13][l - 2 - random14] = 40;
+								matrix[i][j][k + 2 - random13][l - 2 - random14] = 40;
+								matrix[i][j][k + 3 - random13][l - 2 - random14] = 40;
+								
+								
+								
+						
+				
+								
+				
+							}
+							else {
+								console.log("ok");
+								
+								
+								
+							}
+						}
+
+						
+						
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						buildHouse();
+						
+
+							
+
+						
+						
+						/*
+
+						matrix[i][j][k - random13][l - random14] = 50;
+						matrix[i][j][k + 1 - random13][l - random14] = 49;
+						matrix[i][j][k + 2 - random13][l - random14] = 52;
+						matrix[i][j][k + 3 - random13][l - random14] = 50;
+
+						matrix[i][j][k - random13][l - 1 - random14] = 48;
+						matrix[i][j][k + 1 - random13][l - 1 - random14] = 48;
+						matrix[i][j][k + 2 - random13][l - 1 - random14] = 48;
+						matrix[i][j][k + 3 - random13][l - 1 - random14] = 48;
+
+						matrix[i][j][k - random13][l - 2 - random14] = 40;
+						matrix[i][j][k + 1 - random13][l - 2 - random14] = 40;
+						matrix[i][j][k + 2 - random13][l - 2 - random14] = 40;
+						matrix[i][j][k + 3 - random13][l - 2 - random14] = 40;
+
+
+
+
+
+						matrix[i][j][k - random15][l + random16] = 50;
+						matrix[i][j][k + 1 - random15][l + random16] = 49;
+						matrix[i][j][k + 2 - random15][l + random16] = 52;
+						matrix[i][j][k + 3 - random15][l + random16] = 50;
+
+						matrix[i][j][k - random15][l - 1 + random16] = 48;
+						matrix[i][j][k + 1 - random15][l - 1 + random16] = 48;
+						matrix[i][j][k + 2 - random15][l - 1 + random16] = 48;
+						matrix[i][j][k + 3 - random15][l - 1 + random16] = 48;
+
+						matrix[i][j][k - random15][l - 2 + random16] = 40;
+						matrix[i][j][k + 1 - random15][l - 2 + random16] = 40;
+						matrix[i][j][k + 2 - random15][l - 2 + random16] = 40;
+						matrix[i][j][k + 3 - random15][l - 2 + random16] = 40;
+
+
+
+
+
+						matrix[i][j][k + random17][l - random18] = 50;
+						matrix[i][j][k + 1 + random17][l - random18] = 49;
+						matrix[i][j][k + 2 + random17][l - random18] = 52;
+						matrix[i][j][k + 3 + random17][l - random18] = 50;
+
+						matrix[i][j][k + random17][l - 1 - random18] = 48;
+						matrix[i][j][k + 1 + random17][l - 1 - random18] = 48;
+						matrix[i][j][k + 2 + random17][l - 1 - random18] = 48;
+						matrix[i][j][k + 3 + random17][l - 1 - random18] = 48;
+
+						matrix[i][j][k + random17][l - 2 - random18] = 40;
+						matrix[i][j][k + 1 + random17][l - 2 - random18] = 40;
+						matrix[i][j][k + 2 + random17][l - 2 - random18] = 40;
+						matrix[i][j][k + 3 + random17][l - 2 - random18] = 40;
+
+
+						*/
+
+
+					}
+
+
+
+
+
+
+
+
+
+
+
+				}
+			}
+
+
+
+			
+				
+
+
+
+
+
+
+
 		}
+				
 		else {
 			matrix[i][j] = [];
 			for(k=0; k<=100; k++){
@@ -312,7 +760,12 @@ for (i=0; i<100; i++){
 
 			}
 		}
-	}
+		
+
+		console.log(matrix[i][j]);
+	
+	
+}
 
 
 
@@ -324,7 +777,7 @@ for (i=0; i<100; i++){
 
 
 
-// Game objects
+// VIEWPORT
 var viewport = {
 	screen		 : [0,0],
 	startTile	 : [0,0],
@@ -359,28 +812,106 @@ window.onload = function(){
     ;
 }
 
+
+var heightRandom = 0;
+
+
+
 function draw(i, j){
+
+	// FUNCTIONS
+
+	/*function drawCampfire(a, b){
+
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16), (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - b, 16, 16);  
 	
-	console.log("Max Memory Size: " + performance.memory.jsHeapSizeLimit);
-	console.log("Total Memory Size: " + performance.memory.totalJSHeapSize);
-	console.log("Used Memory Size: " + performance.memory.usedJSHeapSize);
+	}
+		*/
+		
+		
+
+	/*function drawBedroll(a, b){
+
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 16, (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - (b + 16), 16, 16);  
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 32, (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - b, 16, 16);  
+
+
+	}
+
+	function drawTreestump(a, b){
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 48, (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - b, 16, 16);  
+
+	}
+
+	function drawStool(a, b){
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 64, (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - b, 16, 16);  
+
+	}
+
+	function drawTent(a, b){
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) + 16, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - b, 16, 16);  
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16), (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 - (a + 16), viewport.offset[1] + l * 16 - b, 16, 16);
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) + 16, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16 - a, viewport.offset[1] + l * 16 - (b + 16), 16, 16);  
+		ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16), (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16 - (a + 16), viewport.offset[1] + l * 16 - (b + 16), 16, 16);  
+	}
+
+	function drawCamp(){
+
+	// VARS
+
+	//var random1 = Math.floor(Math.random() * 4) + 1;
+	//var random2 = Math.floor(Math.random() * 4) + 1;
+		
+
+		drawBedroll(16, 16);
+		drawTreestump(32, 80);
+	}
+*/
+	
+
+	
+	
+	//console.log("Max Memory Size: " + performance.memory.jsHeapSizeLimit);
+	//console.log("Total Memory Size: " + performance.memory.totalJSHeapSize);
+	//console.log("Used Memory Size: " + performance.memory.usedJSHeapSize);
 
     for ( k = viewport.startTile[0]; k <= viewport.endTile[0]; k++){
         for ( l = viewport.startTile[1]; l <= viewport.endTile[1]; l++){
-            if(matrix[i][j][k][l] <= 63){
+
+            //if(matrix[i][j][k][l] == 63 || 7 || 6){
             ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16), (Math.floor(matrix[i][j][k][l] / 8) * 16), 16, 16, viewport.offset[0] + k * 16, viewport.offset[1] + l * 16, 16, 16);  
-            }
+           // }
+
+			
+			
+
+			
+			
                 
         }
     }
+		
 	
-	
+	//var random1 = Math.floor(Math.random() * 4) + 1;
+	//var random2 = Math.floor(Math.random() * 4) + 1;
+	/*
+	var heightOutOf2 = Math.floor(Math.random() * 2) + 1;
+				
+				if (heightOutOf2 == 1){
+					++heightRandom;
+				}
+				if (heightOutOf2 == 2){
+					--heightRandom;					
+				}
+					*/
 
 	
 	
 
 	for (k=0; k < 100; k++){
 		for (l=0; l < 100; l++){
+
+			
 			
 			
 			
@@ -394,6 +925,8 @@ function draw(i, j){
 			
 							
 			if (x[k][l] >= 67){
+
+			//if (l >= 8 && l <= 92){
 				if (isCastle[k][l] == 3){
 					ctx3.fillStyle = 'gold'
 					ctx3.fillRect(k*2, (l*2)+50, 2, 2);
@@ -410,6 +943,20 @@ function draw(i, j){
 					ctx3.fillStyle = 'darkgreen'
 					ctx3.fillRect(k*2, (l*2)+50, 2, 2);
 				}
+
+			//}
+			/*
+			else{
+
+				ctx3.fillStyle = 'lightgrey';
+				
+				ctx3.fillRect(k*2, (l*2)+50, 2, 2);
+				
+
+			}
+				*/
+
+			
 				
 
 				
@@ -451,6 +998,8 @@ function draw(i, j){
 				ctx3.fillRect(k*2, (l*2)+50, 2, 2);										
 			}
 
+			
+
 
 			
 		}
@@ -462,9 +1011,45 @@ function draw(i, j){
 	
 
 	
-    /*for ( k = viewport.startTile[0]; k <= viewport.endTile[0]; k++){
+    for ( k = viewport.startTile[0]; k <= viewport.endTile[0]; k++){
         for ( l = viewport.startTile[1]; l <= viewport.endTile[1]; l++){
-            if(matrix[i][j][k][l] > 63){
+
+			if(matrix[i][j][k][l] == 62){
+
+				
+				//var random2 = Math.floor(Math.random() * 4) + 1;
+				
+				//drawTent(16, 32);
+				//drawCamp();
+				
+				
+				
+
+				//drawCampfire(16, 32);
+
+				//drawBedroll(16, 32);
+
+				/*ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 64, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16, viewport.offset[1] + l * 16, 16, 16);  
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 80, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 16, viewport.offset[1] + l * 16, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 48, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 32, viewport.offset[1] + l * 16, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 64, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 48, viewport.offset[1] + l * 16, 16, 16);
+
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16, viewport.offset[1] + l * 16 - 16, 16, 16);  
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 64, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 16, viewport.offset[1] + l * 16 - 16, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 32, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 32, viewport.offset[1] + l * 16 - 16, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 48, viewport.offset[1] + l * 16 - 16, 16, 16);
+
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16, viewport.offset[1] + l * 16 - 32, 16, 16);  
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 16, viewport.offset[1] + l * 16 - 32, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 16, 16, 16, viewport.offset[0] + k * 16 + 32, viewport.offset[1] + l * 16 - 32, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16 + 48, viewport.offset[1] + l * 16 - 32, 16, 16);
+
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16 + 16, viewport.offset[1] + l * 16 - 48, 16, 16);
+				ctx2.drawImage(worldTilesColor, ((matrix[i][j][k][l]%8) * 16) - 96, (Math.floor(matrix[i][j][k][l] / 8) * 16) - 32, 16, 16, viewport.offset[0] + k * 16 + 32, viewport.offset[1] + l * 16 - 48, 16, 16);
+				*/
+
+			}
+           /* if(matrix[i][j][k][l] > 63){
 				function drawHouse() {
 					ctx2.drawImage(ffTiles, ((startingMap[i][j]%20) * 16), (Math.floor(startingMap[i][j] / 20) * 16), 16, 16, viewport.offset[0] + i * 16, viewport.offset[1] + j * 16, 16, 16);  
                 	ctx2.drawImage(ffTiles, ((startingMap[i][j]%20) * 16) + 16, (Math.floor(startingMap[i][j] / 20) * 16), 16, 16, viewport.offset[0] + i * 16 + 16, viewport.offset[1] + j * 16, 16, 16);  
@@ -492,11 +1077,13 @@ function draw(i, j){
 				}
 				drawHouse();				
             }
+			*/
         }
     }
-	*/
+	
 
 }
+
 
 
 var drawVision = true;
@@ -523,6 +1110,7 @@ addEventListener("keyup", function (e) {
 // Reset the game when the player catches a monster
 var reset = function () {
 	swapLoad(monstersCaught, sinstersCaught);
+	
 	hero.x = 500;
 	hero.y = 500;
 
@@ -542,6 +1130,8 @@ var reset = function () {
 
 // Update game objects
 var update = function (modifier) {
+
+	
 	
 	if (38 in keysDown) { // Player holding up
 		hero.y -= hero.speed * modifier;
@@ -612,7 +1202,7 @@ var update = function (modifier) {
 		
 		setTimeout(function() {
 			
-			++sinstersCaught;
+			--monstersCaught;
 			reset();
 
 		}, delayInMilliseconds);
@@ -628,14 +1218,15 @@ var update = function (modifier) {
 // Draw everything
 
 var render = function () {
+	
 
 	
 	
 	draw(monstersCaught, sinstersCaught);
 	
 
-	viewport.update(hero.x + 102,
-		hero.y + 7);
+	viewport.update(hero.x + 16,
+					hero.y + 16);
 		
 
 
@@ -679,6 +1270,8 @@ var render = function () {
 
 // The main game loop
 var main = function () {
+
+	
 	
 	ctx.clearRect( 0, 0, canvas.width, canvas.height);
 	ctx3.clearRect( 0, 0, canvas.width, canvas.height);
